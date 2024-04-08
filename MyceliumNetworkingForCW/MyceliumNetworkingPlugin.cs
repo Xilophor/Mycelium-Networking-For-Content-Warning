@@ -1,33 +1,29 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using MyceliumNetworkingForCW;
 using UnityEngine;
 
 namespace MyceliumNetworking
 {
 	[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-    public class PluginLoader : BaseUnityPlugin
+    public class MyceliumNetworkingPlugin : BaseUnityPlugin
     {
-		static bool initialized;
+	    public const string Guid = MyPluginInfo.PLUGIN_GUID;
 
-		void Awake()
+	    private static bool _initialized;
+
+	    private void Awake()
 		{
-			if(initialized)
+			if(_initialized)
 				return;
 
-			initialized = true;
+			_initialized = true;
 
 			RugLogger.Initialize(MyPluginInfo.PLUGIN_GUID);
 
 			Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
-			RugLogger.Log("MyceliumNetworking Starting " + MyPluginInfo.PLUGIN_VERSION);
+			RugLogger.Log($"MyceliumNetworking v{MyPluginInfo.PLUGIN_VERSION} is initializing...");
 
 			MyceliumNetwork.Initialize();
 

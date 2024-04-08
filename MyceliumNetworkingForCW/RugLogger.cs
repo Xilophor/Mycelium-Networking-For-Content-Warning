@@ -21,6 +21,11 @@ namespace MyceliumNetworking
 			logSource.LogInfo(message);
 		}
 
+		public static void LogDebug(object message)
+		{
+			logSource.LogDebug(message);
+		}
+
 		public static void LogError(object message)
 		{
 			logSource.LogError(message);
